@@ -50,6 +50,7 @@ AC_SUBST([AM_LDFLAGS])
 # Checks for programs.
 
 # Checks for libraries.
+PKG_CHECK_MODULES(CLIO, clio >= 1.0)
 AX_CXX_CHECK_LIB([clio], [clio::logger], [], [AC_MSG_ERROR([Could not find libclio library, check LDFLAGS])])
 
 # Checks for header files.
@@ -75,7 +76,10 @@ AC_CHECK_HEADERS([stdexcept])
 AC_CHECK_HEADERS([string])
 AC_CHECK_HEADERS([thread])
 
+ac_save_CPPFLAGS=$CPPFLAGS
+CPPFLAGS="$CPPFLAGS $CLIO_CFLAGS"
 AC_CHECK_HEADERS([clio.h], [], [AC_MSG_ERROR([Header for libclio is missing or invalid, check CPPFLAGS])])
+CPPFLAGS=$ac_save_CPPFLAGS
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T
