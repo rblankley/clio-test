@@ -39,6 +39,10 @@
 
 #define UNUSED(x) [&x]{}()
 
+#if _WIN32
+static constexpr const char* PACKAGE_STRING = "clio-test 1.0.0";
+#endif
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void runTestCases()
 {
@@ -105,7 +109,7 @@ int main( int argc, const char *argv[] )
     ::system( "cp clio-test-2.config clio-test.config" );
 #endif
 
-    std::this_thread::sleep_for( std::chrono::seconds( 3 ) );
+    std::this_thread::sleep_for( std::chrono::seconds( 5 ) );
     LOG_ERROR << "No more logging after this message!";
 
     runTestCases();
